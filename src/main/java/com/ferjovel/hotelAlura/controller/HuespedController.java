@@ -1,5 +1,6 @@
 package com.ferjovel.hotelAlura.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.ferjovel.hotelAlura.dao.HuespedDAO;
@@ -16,6 +17,10 @@ public class HuespedController {
 	
 	public void guardar(Huesped huesped) {
 		this.huespedDAO.guardar(huesped);
+	}
+	
+	public int editar(String nombre, String apellido, Date fechaNacimiento, String nacionalidad, String telefono, Integer idReserva, Integer id) {
+		return huespedDAO.editar(nombre, apellido, fechaNacimiento, nacionalidad, telefono, idReserva, id);
 	}
 	
 	public List<Huesped> buscar() {

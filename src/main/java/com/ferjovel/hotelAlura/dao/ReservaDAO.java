@@ -1,6 +1,7 @@
 package com.ferjovel.hotelAlura.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,6 +48,29 @@ public class ReservaDAO {
 		}
 	}
 	
+	public int editar(Date fechaEntrada, Date fechaSalida, String valor, String formaPago, Integer id) {
+		try {
+			final PreparedStatement statement = conexion.prepareStatement(
+					"UPDATE reservas SET fechaEntrada = ?, fechaSalida = ?, valor = ?, "
+							+ "formaPago = ? WHERE id = ?");
+			
+			try (statement) {
+				statement.setDate(1, fechaEntrada);;
+				statement.setDate(2, fechaSalida);
+				statement.setString(3, valor);
+				statement.setString(4, formaPago);
+				statement.setInt(5, id);
+				statement.execute();
+				
+				int updateCount = statement.getUpdateCount();
+				return updateCount;
+			}
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 	public List<Reserva> buscar() {
 		List<Reserva> resultado = new ArrayList<>();
 		
@@ -83,19 +107,6 @@ public class ReservaDAO {
 			throw new RuntimeException(e);
 		}
 		
-	}
-	
-	// TODO
-	public int editar() {
-		final Connection conexion = new ConnectionFactory().recuperaConexion();
-		
-		try (conexion) {
-			final PreparedStatement statement = conexion.prepareStatement(
-					"UPDATE reservas SET fechaEntrada = ?, fechaSalida = ?, valor = ?, "
-					+ "formaPago = ?, WHERE id = ?");
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
 	}
 	
 	private void transformarReservaEnResultSet(List<Reserva> reserva, PreparedStatement statement) throws SQLException {

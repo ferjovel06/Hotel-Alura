@@ -1,6 +1,7 @@
 package com.ferjovel.hotelAlura.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,6 +48,31 @@ public class HuespedDAO {
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException();
+		}
+	}
+	
+	public int editar(String nombre, String apellido, Date fechaNacimiento, String nacionalidad, String telefono, Integer idReserva, Integer id) {
+		try {
+			final PreparedStatement statement = conexion.prepareStatement(
+					"UPDATE huespedes SET nombre = ?, apellido = ?, fechaNacimiento = ?, "
+							+ "nacionalidad = ?, telefono = ?, idReserva = ? WHERE id = ?");
+			
+			try (statement) {
+				statement.setString(1, nombre);;
+				statement.setString(2, apellido);
+				statement.setDate(3, fechaNacimiento);
+				statement.setString(4, nacionalidad);
+				statement.setString(5, telefono);
+				statement.setInt(6, idReserva);
+				statement.setInt(7, id);
+				statement.execute();
+				
+				int updateCount = statement.getUpdateCount();
+				return updateCount;
+			}
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
