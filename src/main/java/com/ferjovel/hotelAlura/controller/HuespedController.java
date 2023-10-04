@@ -23,6 +23,10 @@ public class HuespedController {
 		return huespedDAO.editar(nombre, apellido, fechaNacimiento, nacionalidad, telefono, idReserva, id);
 	}
 	
+	public int eliminar(Integer id) {
+		return huespedDAO.eliminar(id);
+	}
+	
 	public List<Huesped> buscar() {
 		return huespedDAO.buscar();
 	}

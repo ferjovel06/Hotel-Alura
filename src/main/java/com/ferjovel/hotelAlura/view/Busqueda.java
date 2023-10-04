@@ -292,6 +292,20 @@ public class Busqueda extends JFrame {
 		btnEditar.add(lblEditar);
 
 		JPanel btnEliminar = new JPanel();
+		btnEliminar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (tbReservas.isShowing()) {
+					eliminarReserva();
+					limpiarTabla();
+					llenarTablaReservas();
+				} else if (tbHuespedes.isShowing()) {
+					eliminarHuesped();
+					limpiarTabla();
+					llenarTablaHuespedes();
+				}
+			}
+		});
 		btnEliminar.setLayout(null);
 		btnEliminar.setBackground(new Color(12, 138, 199));
 		btnEliminar.setBounds(767, 508, 122, 35);
@@ -442,6 +456,44 @@ public class Busqueda extends JFrame {
 					String.format("%d item modificado con exito!", filasModificadas));
 			
 		}, () -> JOptionPane.showMessageDialog(this, "Por favor, elije un item"));
+	}
+	
+	private void eliminarHuesped() {
+		if (tieneFilaElegidaHuespedes()) {
+			JOptionPane.showMessageDialog(this, "Por favor, elije un item");
+			return;
+		}
+
+		Optional.ofNullable(modelo.getValueAt(tbHuespedes.getSelectedRow(), tbHuespedes.getSelectedColumn()))
+				.ifPresentOrElse(fila -> {
+					Integer id = Integer.valueOf(modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 0).toString());
+
+					int cantidadEliminada;
+
+					cantidadEliminada = this.huespedController.eliminar(id);
+					modelo.removeRow(tbHuespedes.getSelectedRow());
+
+					JOptionPane.showMessageDialog(this, cantidadEliminada + " huesped eliminado con éxito!");
+				}, () -> JOptionPane.showMessageDialog(this, "Por favor, elije un item"));
+	}
+	
+	private void eliminarReserva() {
+		if (tieneFilaElegidaReservas()) {
+			JOptionPane.showMessageDialog(this, "Por favor, elije un item");
+			return;
+		}
+
+		Optional.ofNullable(modelo.getValueAt(tbReservas.getSelectedRow(), tbReservas.getSelectedColumn()))
+				.ifPresentOrElse(fila -> {
+					Integer id = Integer.valueOf(modelo.getValueAt(tbReservas.getSelectedRow(), 0).toString());
+
+					int cantidadEliminada;
+
+					cantidadEliminada = this.reservaController.eliminar(id);
+					modelo.removeRow(tbReservas.getSelectedRow());
+
+					JOptionPane.showMessageDialog(this, cantidadEliminada + " reserva eliminada con éxito!");
+				}, () -> JOptionPane.showMessageDialog(this, "Por favor, elije un item"));
 	}
 
 //Código que permite mover la ventana por la pantalla según la posición de "x" y "y"

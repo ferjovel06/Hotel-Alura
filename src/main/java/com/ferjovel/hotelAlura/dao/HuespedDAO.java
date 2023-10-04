@@ -75,13 +75,32 @@ public class HuespedDAO {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	public int eliminar(int id) {
+		try {
+
+			final PreparedStatement statement = conexion.prepareStatement(
+					"DELETE FROM huespedes WHERE id = ?");
+
+			try (statement) {
+				statement.setInt(1, id);
+				statement.execute();
+
+				int updateCount = statement.getUpdateCount();
+				return updateCount;
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	public List<Huesped> buscar() {
 		List<Huesped> resultado = new ArrayList<>();
 
 		try {
 			final PreparedStatement statement = conexion.prepareStatement(
-					"SELECT id, nombre, apellido, fechaNacimiento, nacionalidad, telefono, idReserva FROM huespedes;");
+					"SELECT id, nombre, apellido, fechaNacimiento, "
+					+ "nacionalidad, telefono, idReserva FROM huespedes;");
 			try (statement) {
 				statement.execute();
 
@@ -113,7 +132,7 @@ public class HuespedDAO {
 		}
 		
 	}
-
+	
 	private void transformarHuespedEnResultSet(List<Huesped> huesped, PreparedStatement statement) throws SQLException {
 		final ResultSet resultSet = statement.getResultSet();
 		try (resultSet) {

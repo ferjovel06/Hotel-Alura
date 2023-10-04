@@ -23,6 +23,10 @@ public class ReservaController {
 		return reservaDAO.editar(fechaEntrada, fechaSalida, valor, formaPago, id);
 	}
 	
+	public int eliminar(Integer id) {
+		return reservaDAO.eliminar(id);
+	}
+	
 	public List<Reserva> buscar() {
 		return reservaDAO.buscar();
 	}
