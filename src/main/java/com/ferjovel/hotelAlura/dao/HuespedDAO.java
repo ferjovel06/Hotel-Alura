@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ferjovel.hotelAlura.modelo.Huesped;
-import com.ferjovel.hotelAlura.modelo.Reserva;
 
 public class HuespedDAO {
 

@@ -17,7 +17,6 @@ import com.toedter.calendar.JDateChooser;
 import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-import java.text.Format;
 import java.util.Calendar;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -302,12 +301,12 @@ public class ReservasView extends JFrame {
 		panel.add(txtValor);
 		txtValor.setColumns(10);
 
-		txtFormaPago = new JComboBox();
+		txtFormaPago = new JComboBox<String>();
 		txtFormaPago.setBounds(68, 417, 289, 38);
 		txtFormaPago.setBackground(SystemColor.text);
 		txtFormaPago.setBorder(new LineBorder(new Color(255, 255, 255), 1, true));
 		txtFormaPago.setFont(new Font("Roboto", Font.PLAIN, 16));
-		txtFormaPago.setModel(new DefaultComboBoxModel(
+		txtFormaPago.setModel(new DefaultComboBoxModel<String>(
 				new String[] { "Tarjeta de Crédito", "Tarjeta de Débito", "Dinero en efectivo" }));
 		panel.add(txtFormaPago);
 
@@ -344,7 +343,7 @@ public class ReservasView extends JFrame {
 				txtFormaPago.getSelectedItem().toString());
 		reservaController.guardar(nuevaReserva);
 
-		JOptionPane.showMessageDialog(this, "Reserva registrada con exito" + nuevaReserva.getId());
+		JOptionPane.showMessageDialog(this, "Reserva "  + nuevaReserva.getId() + " registrada con exito");
 		
 		RegistroHuesped huesped = new RegistroHuesped(nuevaReserva.getId());
 		huesped.setVisible(true);

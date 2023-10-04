@@ -9,7 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ferjovel.hotelAlura.factory.ConnectionFactory;
 import com.ferjovel.hotelAlura.modelo.Reserva;
 
 public class ReservaDAO {
