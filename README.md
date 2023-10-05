@@ -1,6 +1,6 @@
 # Hotel Alura
 
-El hotel Alura🏨🗽 en una aplicacion de escritorio de administracion de reservas de habitaciones y huespedes de un hotel. Los datos se almacenan en una base de datos local en formato MySQL. La aplicacion esta desarrollada en Java con JPA y Java Swing para las interfaces graficas.
+El hotel Alura🏨🗽 es una aplicacion de escritorio de administracion de reservas de habitaciones y huespedes de un hotel. Los datos se almacenan en una base de datos local en formato MySQL. La aplicacion esta desarrollada en Java con JPA y Java Swing para las interfaces graficas.
 
 ## Caracteristicas
 1. Inicio de sesion con usuario y contraseña.
