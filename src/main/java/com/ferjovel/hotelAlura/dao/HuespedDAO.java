@@ -111,16 +111,16 @@ public class HuespedDAO {
 		}
 	}
 	
-	public List<Huesped> buscarId(String id) {
+	public List<Huesped> buscarApellido(String apellido) {
 		List<Huesped> resultado = new ArrayList<>();
 		
 		try {
 			final PreparedStatement statement = conexion
 					.prepareStatement("SELECT id, nombre, apellido, fechaNacimiento, nacionalidad, "
-							+ "telefono, idReserva FROM huespedes WHERE id = ?;");
+							+ "telefono, idReserva FROM huespedes WHERE apellido = ?;");
 			
 			try (statement) {
-				statement.setString(1, id);
+				statement.setString(1, apellido);
 				statement.execute();
 				
 				transformarHuespedEnResultSet(resultado, statement);

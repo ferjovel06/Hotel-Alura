@@ -31,8 +31,8 @@ public class HuespedController {
 		return huespedDAO.buscar();
 	}
 	
-	public List<Huesped> buscarId(String id) {
-		return huespedDAO.buscarId(id);
+	public List<Huesped> buscarApellido(String apellido) {
+		return huespedDAO.buscarApellido(apellido);
 	}
 
 }

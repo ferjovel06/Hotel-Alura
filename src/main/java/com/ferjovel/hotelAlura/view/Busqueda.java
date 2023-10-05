@@ -333,8 +333,8 @@ public class Busqueda extends JFrame {
 		return this.reservaController.buscarId(txtBuscar.getText());
 	}
 	
-	private List<Huesped> buscarHuespedesId() {
-		return this.huespedController.buscarId(txtBuscar.getText());
+	private List<Huesped> buscarHuespedesApellido() {
+		return this.huespedController.buscarApellido(txtBuscar.getText());
 	}
 	
 	private void limpiarTabla() {
@@ -389,7 +389,7 @@ public class Busqueda extends JFrame {
 	}
 	
 	private void llenarTablaHuespedesId() {
-		List<Huesped> huesped = buscarHuespedesId();
+		List<Huesped> huesped = buscarHuespedesApellido();
 		try {
 			for (Huesped huespedes : huesped) {
 				modeloHuesped.addRow(new Object[] {
